@@ -1,0 +1,42 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 需要先在仓库 Settings -> Secrets 配置：
+#   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN （推送到 Docker Hub）
+# 或改用 GitHub Container Registry（ghcr.io），无需额外 secret（用 GITHUB_TOKEN）。
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 登录容器 registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 构建并推送后端镜像
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: backend/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/zhida-backend:latest
+
+      - name: 构建并推送前端镜像
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ai_app/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/zhida-ai-app:latest
