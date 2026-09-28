@@ -1,7 +1,7 @@
 # 智答 · AI 知识库问答平台（ZhiDa AI Knowledge Hub）
 
-> 一个面向 **大一学生暑假实习面试** 的综合性 Demo 项目。
-> 以"文档智能问答"为主线，把 **AI 应用开发 / 大模型训练 / 云运维 / RAG 开发 / Python 后端开发** 五个目标岗位方向，串成一个结构规范、可独立运行、可直接上传 GitHub 的端到端项目。
+> 一个综合性 Demo 项目。
+> 以"文档智能问答"为主线，把 **AI 应用开发 / 大模型训练 / 云运维 / RAG 开发 / Python 后端开发** 五个目标岗位方向，串成一个结构规范、可独立运行项目。
 
 ---
 
@@ -147,34 +147,6 @@ cd deploy
 docker compose up --build
 # 访问 http://localhost 即可（nginx 反向代理前端与后端）
 ```
-
----
-
-## 五、如何上传到 GitHub
-
-```bash
-git init
-git add .
-git commit -m "feat: 初始化智答 AI 知识库问答平台 Demo"
-git branch -M main
-git remote add origin https://github.com/<你的用户名>/zhida-ai-knowledge-hub.git
-git push -u origin main
-```
-
-> 本项目已内置 `.gitignore`（忽略 `__pycache__`、`*.pyc`、虚拟环境、模型权重等大文件），
-> 不会把无关文件提交上去，可直接 push。
-
----
-
-## 六、面试怎么讲（速记）
-
-- **RAG**：能讲清"切片粒度怎么选、向量化为什么先用 TF-IDF 兜底、检索召回怎么评估、如何避免幻觉（答案必须引用原文）"。
-- **后端**：能讲清"FastAPI 异步模型、Pydantic 校验、依赖注入、接口如何限流/鉴权（可扩展点）"。
-- **AI 应用**：能讲清"前端怎么和后端联调、加载态/错误处理/引用展示这些体验细节"。
-- **大模型训练**：能讲清"LoRA 为什么省显存（只训低秩矩阵）、数据格式、过拟合怎么看、评估指标"。
-- **云运维**：能讲清"容器化解决了什么问题、nginx 为什么放前面、CI 保证什么、监控看哪些指标"。
-
-更完整的考点清单见 [`docs/面试技术要点.md`](docs/面试技术要点.md)。
 
 ---
 
