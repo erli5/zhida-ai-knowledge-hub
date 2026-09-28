@@ -1,0 +1,5 @@
+{"instruction": "请用一句话解释什么是 RAG", "input": "", "output": "RAG（检索增强生成）是一种先检索外部知识再让大模型据此生成答案的技术，能减少幻觉并支持知识动态更新。"}
+{"instruction": "解释 LoRA 微调的核心思想", "input": "", "output": "LoRA 通过给权重矩阵旁路增加两个低秩矩阵并只训练它们，从而大幅减少可训练参数量和显存占用，训练更快且便于插拔。"}
+{"instruction": "容器化部署有哪些好处", "input": "", "output": "容器化带来环境一致性、隔离性、易扩展和易回滚等好处，能够解决不同环境行为不一致的问题。"}
+{"instruction": "如何评估 RAG 系统的效果", "input": "", "output": "可从检索召回（recall@k）与答案质量（忠实度、相关性）两方面评估，常用 RAGAS 等框架做自动化评测。"}
+{"instruction": "FastAPI 相比 Flask 有什么优势", "input": "", "output": "FastAPI 原生支持异步、基于类型提示做数据校验，并能自动生成交互式 OpenAPI 文档，性能也更好。"}
