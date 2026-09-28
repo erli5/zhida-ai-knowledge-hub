@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# 虚拟环境
+venv/
+.venv/
+env/
+.env
+
+# 依赖与缓存
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 模型权重与大文件（不入库）
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.gguf
+models/
+output/
+checkpoints/
+*.onnx
+
+# 数据集（大文件用 Git LFS 或外链，示例小数据可保留）
+# data/large_*.jsonl
+
+# IDE / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 日志与运行时
+*.log
+logs/
+data/vector_index/
+
+# 前端
+node_modules/
+.streamlit/
