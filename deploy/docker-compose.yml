@@ -1,0 +1,61 @@
+# 智答平台一键编排：后端 + AI 应用 + Nginx 反向代理
+# 使用（在仓库根目录执行）：
+#   cd deploy && docker compose up --build
+# 访问：
+#   http://localhost        -> Nginx 统一入口（前端 + 后端 API）
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    container_name: zhida-backend
+    environment:
+      - PYTHONPATH=/app
+    expose:
+      - "8000"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - "-c"
+        - "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - zhida-net
+
+  ai_app:
+    build:
+      context: ..
+      dockerfile: ai_app/Dockerfile
+    container_name: zhida-ai-app
+    environment:
+      - ZHIDA_API_URL=http://backend:8000
+    expose:
+      - "8501"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - zhida-net
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: zhida-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+      - ai_app
+    networks:
+      - zhida-net
+
+networks:
+  zhida-net:
+    driver: bridge
