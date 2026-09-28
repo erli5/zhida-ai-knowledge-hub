@@ -1,0 +1,30 @@
+# LoRA 微调配置示例
+# 运行：python finetune_lora.py --config configs/lora_config.yaml
+
+# 基座模型（中文小模型，首次运行会自动下载）
+model_name_or_path: uer/gpt2-chinese-cluecorpussmall
+# 训练数据（SFT 格式：instruction / input / output）
+data_path: ./data/sample.jsonl
+# 输出目录（保存 LoRA 适配器）
+output_dir: ./output
+
+# 文本
+max_seq_length: 256
+
+# 训练超参
+num_train_epochs: 3
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4
+learning_rate: 2e-4
+warmup_ratio: 0.03
+logging_steps: 5
+save_strategy: epoch
+fp16: false
+
+# LoRA 参数
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+# GPT2 系列中文模型注意力线性层名为 c_attn
+lora_target_modules:
+  - c_attn
