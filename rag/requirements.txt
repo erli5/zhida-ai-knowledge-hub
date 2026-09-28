@@ -1,0 +1,5 @@
+# RAG 核心模块依赖
+# 默认零依赖即可运行（纯 Python TF-IDF 实现）。
+# 如需更强的语义向量检索，可取消下一行注释安装：
+# sentence-transformers==2.7.0
+numpy==1.26.4
